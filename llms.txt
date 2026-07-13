@@ -1,0 +1,42 @@
+# pray
+
+> Package manager for the language placed before inference. Prayfile lists pre-inference material as dependency; `pray` resolves, locks, and renders `AGENTS.md` and related targets.
+
+Canonical site: [pray.kisko.dev](https://pray.kisko.dev/). HTML is the primary presentation; [index.md](https://pray.kisko.dev/index.md) mirrors this landing in Markdown.
+
+## Start here
+
+- [Landing (HTML)](https://pray.kisko.dev/): Orientation, CLI and tools paths, start rites, project-specific rules, materialization, prayers catalog
+- [Landing (Markdown)](https://pray.kisko.dev/index.md): Same content without layout or scripts
+- [Specification](https://github.com/kiskolabs/pray/blob/main/SPEC.md): Prayfile format and CLI contract
+- [Install](https://github.com/kiskolabs/pray#installation): `cargo install --git https://github.com/kiskolabs/pray --locked pray`
+
+## Repositories
+
+- [kiskolabs/pray](https://github.com/kiskolabs/pray): CLI, Prayfile specification, examples, `pray serve`
+- [amkisko/prayers](https://github.com/amkisko/prayers): Shared prayer packages
+
+## Context essays (amaaov.github.io)
+
+- [Prayfile: language placed before inference](https://amaaov.github.io/pages/20260626120000_prayfile_language_before_inference_en.html)
+- [Interactive pray demo](https://amaaov.github.io/pages/20260627120000_pray_demo_en.html)
+
+## Feeds and indexes
+
+- [Sitemap](https://pray.kisko.dev/sitemap.xml)
+- [robots.txt](https://pray.kisko.dev/robots.txt)
+
+## Package catalog (amkisko/prayers)
+
+[package catalog](https://github.com/amkisko/prayers#package-catalog)
+
+- working-rules — fragment
+- ruby-conventions — fragment
+- rust-conventions — fragment
+- elixir-conventions — fragment
+- minimal-implementation — fragment
+- dependency-policy — fragment + skill
+- engineering-audit — skill
+- changelog-update — skill
+- collaboration-workflow — fragment
+- getting-started — fragment

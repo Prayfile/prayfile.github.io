@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+User-agent: ia_archiver
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+Sitemap: https://pray.kisko.dev/sitemap.xml
+Host: pray.kisko.dev

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" role="img" aria-label="pray morse">
+  <defs>
+    <radialGradient id="void" cx="50%" cy="44%" r="72%">
+      <stop offset="0%" stop-color="#141218"/>
+      <stop offset="100%" stop-color="#060608"/>
+    </radialGradient>
+    <radialGradient id="wet" cx="50%" cy="50%" r="58%">
+      <stop offset="0%" stop-color="#c9a87c" stop-opacity="0.14"/>
+      <stop offset="55%" stop-color="#8eb8d8" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#060608" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="0.65" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="echo" x="-120%" y="-120%" width="340%" height="340%">
+      <feGaussianBlur stdDeviation="1.1"/>
+    </filter>
+    <g id="dot">
+      <circle r="1.35" fill="#e0c9a0"/>
+      <circle r="0.55" fill="#fff8ee" fill-opacity="0.55"/>
+    </g>
+    <g id="dash">
+      <rect x="-0.95" y="-2.65" width="1.9" height="5.3" rx="0.95" fill="#c9a87c"/>
+      <rect x="-0.45" y="-2.1" width="0.9" height="4.2" rx="0.45" fill="#e8d4b0" fill-opacity="0.45"/>
+    </g>
+  </defs>
+
+  <rect width="32" height="32" rx="6" fill="url(#void)"/>
+  <rect width="32" height="32" rx="6" fill="url(#wet)"/>
+  <rect x="3.5" y="3.5" width="25" height="25" rx="4" stroke="#c9a87c" stroke-opacity="0.1" stroke-width="0.5"/>
+
+  <g filter="url(#echo)" opacity="0.38" transform="translate(16 15.2)">
+    <use href="#dot" transform="translate(-9.5 -5.2)"/>
+    <use href="#dash" transform="translate(-9.5 -1.4)"/>
+    <use href="#dash" transform="translate(-9.5 2.4)"/>
+    <use href="#dot" transform="translate(-9.5 6.2)"/>
+    <use href="#dot" transform="translate(-3.2 -3.8)"/>
+    <use href="#dash" transform="translate(-3.2 0)"/>
+    <use href="#dot" transform="translate(-3.2 3.8)"/>
+    <use href="#dot" transform="translate(3.2 -3.8)"/>
+    <use href="#dash" transform="translate(3.2 0)"/>
+    <use href="#dash" transform="translate(9.5 -5.2)"/>
+    <use href="#dot" transform="translate(9.5 -1.4)"/>
+    <use href="#dash" transform="translate(9.5 2.4)"/>
+    <use href="#dash" transform="translate(9.5 6.2)"/>
+  </g>
+
+  <g filter="url(#glow)" transform="translate(16 15.2)">
+    <use href="#dot" transform="translate(-9.5 -5.2)"/>
+    <use href="#dash" transform="translate(-9.5 -1.4)"/>
+    <use href="#dash" transform="translate(-9.5 2.4)"/>
+    <use href="#dot" transform="translate(-9.5 6.2)"/>
+    <use href="#dot" transform="translate(-3.2 -3.8)"/>
+    <use href="#dash" transform="translate(-3.2 0)"/>
+    <use href="#dot" transform="translate(-3.2 3.8)"/>
+    <use href="#dot" transform="translate(3.2 -3.8)"/>
+    <use href="#dash" transform="translate(3.2 0)"/>
+    <use href="#dash" transform="translate(9.5 -5.2)"/>
+    <use href="#dot" transform="translate(9.5 -1.4)"/>
+    <use href="#dash" transform="translate(9.5 2.4)"/>
+    <use href="#dash" transform="translate(9.5 6.2)"/>
+  </g>
+
+  <path d="M7 24.5h18" stroke="#c9a87c" stroke-opacity="0.22" stroke-width="0.6" stroke-linecap="round"/>
+  <circle cx="16" cy="24.5" r="0.55" fill="#00f5d4" fill-opacity="0.2"/>
+</svg>
