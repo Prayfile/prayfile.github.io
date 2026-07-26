@@ -8,8 +8,17 @@ Canonical site: [pray.kisko.dev](https://pray.kisko.dev/). HTML is the primary p
 
 - [Landing (HTML)](https://pray.kisko.dev/): Orientation, CLI and tools paths, start rites, project-specific rules, materialization, prayers catalog
 - [Landing (Markdown)](https://pray.kisko.dev/index.md): Same content without layout or scripts
-- [Specification](https://github.com/kiskolabs/pray/blob/main/SPEC.md): Prayfile format and CLI contract
+- [Specification](https://github.com/kiskolabs/pray/blob/main/SPEC.md): Prayfile format and CLI contract (`compose`, `tree`, `pray`, `file:`, `pray format`)
 - [Install](https://github.com/kiskolabs/pray#installation): `cargo install --git https://github.com/kiskolabs/pray --locked pray`
+
+## Prayfile destination forms
+
+Recommended on `prayfile "1"`:
+
+- `compose "AGENTS.md" do … end` — ordered local embeds and package fragments
+- `tree ".agents/skills" do … end` — folder/skill exports
+- `pray "owner/name", "~> 1.0", file: "SECURITY.md"` — exact file bytes
+- `pray format` (`fmt`) — rewrite legacy `target` / `agent` manifests to the destination DSL
 
 ## Repositories
 
@@ -31,12 +40,19 @@ Canonical site: [pray.kisko.dev](https://pray.kisko.dev/). HTML is the primary p
 [package catalog](https://github.com/amkisko/prayers#package-catalog)
 
 - working-rules — fragment
+- security — fragment
+- docs-conventions — fragment
+- dependency-issues — fragment
+- dependency-policy — fragment + skill
 - ruby-conventions — fragment
 - rust-conventions — fragment
 - elixir-conventions — fragment
 - minimal-implementation — fragment
-- dependency-policy — fragment + skill
 - engineering-audit — skill
 - changelog-update — skill
 - collaboration-workflow — fragment
 - getting-started — fragment
+- community-security — file
+- community-code-of-conduct — file
+- community-governance — file
+- community-contributing — file

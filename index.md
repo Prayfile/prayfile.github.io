@@ -35,8 +35,8 @@ _resolve · lock · plan · apply · verify_
 Run `pray` locally or in CI. Resolution writes `Prayfile.lock`; `apply` writes rendered files into the repository.
 
 1. Install the CLI with Cargo.
-2. `pray init` scaffolds `Prayfile` and targets.
-3. Declare `agent` packages and sources.
+2. `pray init` scaffolds `Prayfile` and destinations.
+3. Declare `compose`, `tree`, and `pray` inputs (or migrate with `pray format`).
 4. `pray install` → `pray plan` → `pray apply`.
 5. `pray verify` and `pray drift` in CI.
 
@@ -83,21 +83,19 @@ Example `Prayfile` using [amkisko/prayers](https://github.com/amkisko/prayers):
 ```ruby
 prayfile "1"
 
-source "amkisko", git: "https://github.com/amkisko/prayers", distribution: "prayers"
+source "amkisko", git: "https://github.com/amkisko/prayers.git"
 
-target :agents do
-  output "AGENTS.md"
-  skills ".agents/skills"
+compose "AGENTS.md" do
+  pray "amkisko/working-rules", "~> 2.0"
+  pray "amkisko/ruby-conventions", "~> 1.0"
 end
 
-agent "amkisko/working-rules", "~> 1.0", source: "amkisko", exports: ["working-rules"]
-agent "amkisko/ruby-conventions", "~> 1.0", source: "amkisko", exports: ["ruby-conventions"]
-agent "amkisko/engineering-audit", "~> 1.0", source: "amkisko", exports: ["skill"]
-
-render mode: :managed, conflict: :fail, churn: :minimal
+tree ".agents/skills" do
+  pray "amkisko/engineering-audit", "~> 2.0"
+end
 ```
 
-Use `rust-conventions` or `elixir-conventions` on other stacks.
+Use `rust-conventions` or `elixir-conventions` on other stacks. Legacy `target` / `agent` forms remain valid; `pray format` rewrites them to this destination DSL.
 
 ### daily
 
@@ -105,6 +103,7 @@ Use `rust-conventions` or `elixir-conventions` on other stacks.
 pray install    # resolve dependencies
 pray plan       # preview rendered changes
 pray apply      # write targets + refresh lock spans
+pray format     # rewrite Prayfile to destination DSL
 pray verify     # checksum managed spans
 pray drift      # detect hand-edits and renderer drift
 pray confess    # signed accept / reject feedback
@@ -116,33 +115,32 @@ pray confess    # signed accept / reject feedback
 
 Shared prayers hold generic fragments. Project paths, credentials, and deployment detail belong in `docs/`, `usr/docs/`, and `.agents/`.
 
-Three zones. **Recipe** — `Prayfile`, packages, lock — changes via `pray add`, `pray update`, `pray apply`. **Human-owned** `.agents/` files stay editable; pray embeds them on render. **Managed** blocks between pray markers regenerate from lock, recipe, and `local` paths.
+Three zones. **Recipe** — `Prayfile`, packages, lock — changes via `pray add`, `pray update`, `pray apply`. **Human-owned** `.agents/` files stay editable; pray embeds them on render. **Managed** blocks between pray markers regenerate from lock, recipe, and compose-bound local paths.
 
 | zone | contents |
 |------|----------|
 | **recipe** | Prayfile · packages · lock |
-| **human-owned** | `.agents/` · `local` in Prayfile |
+| **human-owned** | `.agents/` · local embeds in compose |
 | **managed** | AGENTS.md blocks · `.agents/skills` |
 
-Put project-specific language in `.agents/` and list it with `local`.  
+Put project-specific language in `.agents/` and list it with `pray` inside `compose`.  
 Hand-edits inside managed spans surface as *custom implementation* in `pray verify` and `pray drift`.
 
 ```ruby
-target :agents do
-  output "AGENTS.md"
-  skills ".agents/skills"
+compose "AGENTS.md" do
+  pray ".agents/project.md"
+  pray "amkisko/working-rules", "~> 2.0"
+  pray ".agents/security.md"
 end
 
-agent "amkisko/working-rules", "~> 1.0", source: "amkisko", exports: ["working-rules"]
+tree ".agents/skills" do
+  pray "amkisko/engineering-audit", "~> 2.0"
+end
 
-local ".agents/project.md"
-local ".agents/security.md", position: :after
 local ".agents/private.md", optional: true
-
-render mode: :managed, conflict: :fail, churn: :minimal
 ```
 
-`local` paths re-embed on each render. Declare *silence* to omit a shared fragment; the lock records it. For a project-only package: `pray prayer init`, then a path source in `Prayfile`.
+Local paths re-embed on each render. Declaration order inside `compose` is render order. Declare *silence* to omit a shared fragment; the lock records it. For a project-only package: `pray prayer init`, then a path source in `Prayfile`. Whole-file destinations use `pray "pkg", "~> 1.0", file: "SECURITY.md"`.
 
 ---
 
@@ -167,15 +165,22 @@ A manifest entry differs from bytes a tool loads. Truth: `Prayfile.lock`. Recove
 | package | kind |
 |---------|------|
 | working-rules | fragment |
+| security | fragment |
+| docs-conventions | fragment |
+| dependency-issues | fragment |
+| dependency-policy | fragment + skill |
 | ruby-conventions | fragment |
 | rust-conventions | fragment |
 | elixir-conventions | fragment |
 | minimal-implementation | fragment |
-| dependency-policy | fragment + skill |
 | engineering-audit | skill |
 | changelog-update | skill |
 | collaboration-workflow | fragment |
 | getting-started | fragment |
+| community-security | file |
+| community-code-of-conduct | file |
+| community-governance | file |
+| community-contributing | file |
 
 [Full catalog](https://github.com/amkisko/prayers#package-catalog)
 
