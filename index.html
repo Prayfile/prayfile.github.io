@@ -68,7 +68,7 @@
   }
   </script>
 </head>
-<body>
+<body class="screen-fit">
   <div class="moisture-field" aria-hidden="true"></div>
   <div class="vignette" aria-hidden="true"></div>
   <div class="pray-backdrop" id="pray-backdrop" aria-hidden="true">pray</div>
@@ -76,30 +76,19 @@
   <header class="site-top">
     <a class="home-link" href="#threshold">pray</a>
     <nav class="top-nav" aria-label="Site">
-      <a class="nav-link" href="#start">start</a>
-      <a class="nav-link" href="#adopt">adopt</a>
-      <a class="nav-link" href="#local">local</a>
-      <a class="nav-link" href="#orientation">orientation</a>
-      <a class="nav-link" href="#paths">paths</a>
-      <a class="nav-link" href="#prayers">prayers</a>
+      <a class="nav-link" href="#install">install</a>
+      <a class="nav-link" href="#prompt">prompt</a>
+      <a class="nav-link" href="llms.txt">llms.txt</a>
       <a class="nav-link" href="https://github.com/kiskolabs/pray" target="_blank" rel="noopener noreferrer">spec</a>
     </nav>
   </header>
 
-  <main class="chamber" aria-label="pray landing">
+  <main class="chamber chamber--screen" aria-label="pray landing">
     <section class="plinth plinth--title" id="threshold">
       <div class="plinth-inner">
         <h1 class="pray-voice">pray</h1>
         <p class="subtitle">package manager for the language placed before inference</p>
         <p class="morse-rhythm morse-rhythm--hero" aria-hidden="true">.--. ·−· ·− −·−−</p>
-        <div class="prose prose--bright">
-          <p>The same plaintext and markdown traveled between repositories — <a href="https://github.com/amkisko">amkisko</a> gems among them. That surrounding material is the <strong>language placed before inference</strong>: policies, templates, memories, formatting rules, workflow notes. It shapes attention, refusal, style, and action before any model answers. <strong>Prayfile</strong> lists it as dependency; <code>pray</code> resolves, locks, and renders <code>AGENTS.md</code> and other targets.</p>
-        </div>
-        <p class="threshold-links">
-          <a class="threshold-link" href="#start">descend to start</a>
-          <span class="threshold-sep" aria-hidden="true">/</span>
-          <a class="threshold-link" href="https://github.com/kiskolabs/pray" target="_blank" rel="noopener noreferrer">kiskolabs/pray</a>
-        </p>
       </div>
     </section>
 
@@ -107,174 +96,29 @@
       treat pre-inference input as a dependency
     </blockquote>
 
-    <div class="divider" aria-hidden="true"></div>
-
-    <section class="plinth" id="orientation">
-      <header class="plinth-head plinth-head--beat-a">
-        <p class="section-glyph" aria-hidden="true">I</p>
-        <p class="museum-label">orientation</p>
-        <p class="morse-rhythm" aria-hidden="true">.--.</p>
-      </header>
-      <div class="prose">
-        <p>The same <code>AGENTS.md</code> fragments, checklists, and conventions still moved repo to repo — stale hunks, silent edits, weak lineage, rollback by hand. Prayfile records them in a manifest and lockfile; <code>pray</code> renders deterministically; <code>verify</code> checksums managed spans.</p>
-        <p>In prayer, orientation precedes information — ask, praise, confess, remember, surrender, repeat, listen. Breath, rhythm, silence, and repetition carry weight beside the words. <code>pray</code> takes that order: language revision-locked and rendered before uncertain response. Shared spans are <em>prayers</em>; <code>pray confess</code> records accept or reject; <em>silence</em> in the spec omits resolved hunks from a target while keeping them in the lock. <a href="https://amaaov.github.io/pages/20260626120000_prayfile_language_before_inference_en.html">language before inference</a>.</p>
-        <p>Inference here means provider, tool, retrieval, field order, repetition, silence, situation — conditions under which output stays probabilistic. Prayfile holds the manifest, lockfile, and rendered files.</p>
-      </div>
-      <blockquote class="signal signal--feedback" data-echo="uncertain response uncertain response">
-        language before uncertain response
-      </blockquote>
-      <p class="whisper whisper--center">Checksums cover spans that affect output. Revisions pin instructions that bend behaviour. Render twice; bytes must match.</p>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <section class="plinth" id="paths">
-      <header class="plinth-head plinth-head--beat-b">
-        <p class="section-glyph" aria-hidden="true">II</p>
-        <p class="museum-label">two ways in</p>
-        <p class="morse-rhythm" aria-hidden="true">·−·</p>
-      </header>
-
-      <div class="fork" aria-label="CLI and inference-tool workflows">
-        <div class="fork-wing fork-wing--terminal" id="path-terminal">
-          <p class="fork-voice">terminal</p>
-          <p class="fork-whisper">resolve · lock · plan · apply · verify</p>
-          <div class="prose">
-            <p>Run <code>pray</code> locally or in CI. Resolution writes <code>Prayfile.lock</code>; <code>apply</code> writes rendered files into the repository.</p>
-          </div>
-          <ol class="rite-list">
-            <li>Install the CLI with Cargo.</li>
-            <li><code>pray init</code> scaffolds <code>Prayfile</code> and destinations.</li>
-            <li>Declare <code>compose</code>, <code>tree</code>, and <code>pray</code> inputs (or migrate with <code>pray format</code>).</li>
-            <li><code>pray install</code> → <code>pray plan</code> → <code>pray apply</code>.</li>
-            <li><code>pray verify</code> and <code>pray drift</code> in CI.</li>
-          </ol>
-        </div>
-
-        <div class="fork-axis" aria-hidden="true"><span>or</span></div>
-
-        <div class="fork-wing fork-wing--tools" id="path-tools">
-          <p class="fork-voice">tools</p>
-          <p class="fork-whisper">assistants · review bots · generators · wrappers</p>
-          <div class="prose">
-            <p>Tools read committed files. After <code>apply</code>, pinned text is in <code>AGENTS.md</code>, skills, and checklists; silence entries in the lock omit spans from that target.</p>
-          </div>
-          <ol class="rite-list">
-            <li>Wire shared packages in <code>Prayfile</code> (for example from <a href="https://github.com/amkisko/prayers">amkisko/prayers</a>).</li>
-            <li>Render once; commit <code>Prayfile.lock</code> and inference-facing targets.</li>
-            <li>Open the tree in your tool; on-disk targets carry pinned revisions.</li>
-            <li>Update packages; review with <code>pray plan</code> before <code>apply</code>.</li>
-            <li>Record feedback with <code>pray confess</code>.</li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <section class="plinth plinth--start" id="start">
-      <header class="plinth-head plinth-head--beat-a">
-        <p class="section-glyph" aria-hidden="true">III</p>
-        <p class="museum-label">start here</p>
-        <p class="morse-rhythm" aria-hidden="true">·−</p>
-      </header>
-
-      <article class="rite rite--beat-a">
-        <header class="rite-head">
-          <p class="rite-numeral" aria-hidden="true">01</p>
-          <p class="museum-label museum-label--rite">install</p>
-          <p class="morse-rhythm morse-rhythm--rite" aria-hidden="true">.--.</p>
-        </header>
-        <div class="incantation-shell">
-          <button type="button" class="copy-rite" data-copy-target="install-incantation">copy</button>
-          <pre class="incantation" id="install-incantation" tabindex="0"><code>cargo install pray-cli --locked</code></pre>
-        </div>
-        <p class="whisper">Crates.io package is <code>pray-cli</code> (name <code>pray</code> is taken); binary is <code>pray</code>. Git form: <code>cargo install --git https://github.com/kiskolabs/pray --locked pray-cli</code>. Installs to <code>~/.cargo/bin</code>.</p>
-      </article>
-
-      <article class="rite rite--beat-b">
-        <header class="rite-head">
-          <p class="rite-numeral" aria-hidden="true">02</p>
-          <p class="museum-label museum-label--rite">scaffold</p>
-          <p class="morse-rhythm morse-rhythm--rite" aria-hidden="true">·−·</p>
-        </header>
-        <div class="incantation-shell">
-          <button type="button" class="copy-rite" data-copy-target="scaffold-incantation">copy</button>
-          <pre class="incantation" id="scaffold-incantation" tabindex="0"><code>cd your-project
-pray init
-pray install
-pray plan
-pray apply</code></pre>
-        </div>
-        <p class="whisper">Writes <code>Prayfile</code>, <code>Prayfile.lock</code>, and rendered targets including <code>AGENTS.md</code>.</p>
-      </article>
-
-      <article class="rite rite--beat-a">
-        <header class="rite-head">
-          <p class="rite-numeral" aria-hidden="true">03</p>
-          <p class="museum-label museum-label--rite">shared guidance</p>
-          <p class="morse-rhythm morse-rhythm--rite" aria-hidden="true">·−</p>
-        </header>
-        <div class="prose">
-          <p>Example <code>Prayfile</code> using <a href="https://github.com/amkisko/prayers">amkisko/prayers</a>. Compose project overlay first; pick one language pack; do not compose <code>getting-started</code>.</p>
-        </div>
-        <div class="incantation-shell">
-          <button type="button" class="copy-rite" data-copy-target="shared-incantation">copy</button>
-          <pre class="incantation incantation--wide" id="shared-incantation" tabindex="0"><code>prayfile "1"
-
-pray do
-  support_email "support@app.example"
-  security_email "security@app.example"
-end
-
-source "amkisko", git: "https://github.com/amkisko/prayers.git"
-
-compose "AGENTS.md" do
-  pray ".agents/project.md"
-  pray "amkisko/working-rules", "~> 2.0"
-  pray "amkisko/ruby-conventions", "~> 1.0"
-end
-
-tree ".agents/skills" do
-  pray "amkisko/engineering-audit", "~> 2.0"
-end</code></pre>
-        </div>
-        <p class="whisper">Swap for <code>rust-conventions</code>, <code>elixir-conventions</code>, or <code>kotlin-conventions</code>. Keep composed <code>AGENTS.md</code> under ~16&nbsp;KiB. Legacy <code>target</code> / <code>agent</code> still parse on prayfile <code>"1"</code> but warn; they leave in version&nbsp;2 — run <code>pray format</code>.</p>
-      </article>
-
-      <article class="rite rite--beat-b">
-        <header class="rite-head">
-          <p class="museum-label museum-label--rite">daily</p>
-          <p class="morse-rhythm morse-rhythm--rite" aria-hidden="true">−·−−</p>
-        </header>
-        <div class="incantation-shell">
-          <button type="button" class="copy-rite" data-copy-target="daily-incantation">copy</button>
-          <pre class="incantation incantation--compact" id="daily-incantation" tabindex="0"><code>pray install    # resolve dependencies
-pray plan       # preview rendered changes
-pray apply      # write targets + refresh lock spans
-pray format     # rewrite Prayfile to destination DSL
-pray verify     # checksum managed spans
-pray drift      # detect hand-edits and renderer drift
-pray confess    # signed accept / reject feedback
-pray update     # bump within constraints, then plan/apply</code></pre>
-        </div>
-      </article>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <section class="plinth plinth--start" id="adopt">
-      <header class="plinth-head plinth-head--beat-b">
-        <p class="section-glyph" aria-hidden="true">III·b</p>
-        <p class="museum-label">adopt for agents</p>
-        <p class="morse-rhythm" aria-hidden="true">·− ····</p>
-      </header>
-      <div class="prose">
-        <p>Paste into a coding agent when wiring this repository like an amkisko consumer. Shared guidance stays locked; project overlay stays local.</p>
-      </div>
+    <section class="plinth plinth--compact" id="install">
       <div class="incantation-shell">
-        <button type="button" class="copy-rite" data-copy-target="adopt-prompt">copy</button>
-        <pre class="incantation incantation--prompt" id="adopt-prompt" tabindex="0"><code>Adopt pray + amkisko/prayers in this repository the same way amkisko consumers do.
+        <button type="button" class="copy-rite" data-copy-target="install-incantation">copy</button>
+        <pre class="incantation" id="install-incantation" tabindex="0"><code>cargo install pray-cli --locked
+pray init && pray install && pray plan && pray apply</code></pre>
+      </div>
+      <p class="whisper whisper--center">binary <code>pray</code> · package <code>pray-cli</code> · then commit lock and rendered targets</p>
+    </section>
+
+    <section class="plinth plinth--compact" id="prompt">
+      <div class="prompt-bar">
+        <button type="button" class="veil-toggle" id="prompt-toggle" aria-expanded="false" aria-controls="prompt-panel">
+          prompt
+        </button>
+        <button type="button" class="copy-rite copy-rite--bar" data-copy-target="adopt-prompt">copy</button>
+        <a class="adopt-llms" href="llms.txt">llms.txt</a>
+      </div>
+      <div class="veil" id="prompt-veil">
+        <div class="veil-clip">
+          <div class="veil-panel" id="prompt-panel" role="region" aria-labelledby="prompt-toggle" inert>
+            <div class="incantation-shell">
+              <button type="button" class="copy-rite" data-copy-target="adopt-prompt">copy</button>
+              <pre class="incantation incantation--prompt" id="adopt-prompt" tabindex="0"><code>Adopt pray + amkisko/prayers in this repository the same way amkisko consumers do.
 
 Goal
 Treat shared agent guidance as locked dependencies, not copy-pasted AGENTS.md.
@@ -320,154 +164,14 @@ Hard rules
 
 Done when
 pray verify passes, AGENTS.md and skills are rendered from lock, project overlay is composed first, and cache is ignored.</code></pre>
+            </div>
+          </div>
+        </div>
       </div>
-      <p class="whisper whisper--center">Also in <a href="llms.txt">llms.txt</a>. Tune emails, language pack, and product-surface packages per repo.</p>
     </section>
 
-    <div class="divider" aria-hidden="true"></div>
-
-    <section class="plinth" id="local">
-      <header class="plinth-head plinth-head--beat-b">
-        <p class="section-glyph" aria-hidden="true">IV</p>
-        <p class="museum-label">project-specific</p>
-        <p class="morse-rhythm" aria-hidden="true">−·−−</p>
-      </header>
-      <div class="prose">
-        <p>Shared prayers hold generic fragments. Project paths, credentials, and deployment detail belong in <code>docs/</code>, <code>usr/docs/</code>, and <code>.agents/</code>.</p>
-        <p>Three zones. <strong>Recipe</strong> — <code>Prayfile</code>, packages, lock — changes via <code>pray add</code>, <code>pray update</code>, <code>pray apply</code>. <strong>Human-owned</strong> <code>.agents/</code> files stay editable; pray embeds them on render. <strong>Managed</strong> blocks between pray markers regenerate from lock, recipe, and compose-bound local paths.</p>
-      </div>
-      <div class="triad">
-        <p class="triad-line"><strong>recipe</strong> Prayfile · packages · lock</p>
-        <p class="triad-line"><strong>human-owned</strong> .agents/ · local embeds in compose</p>
-        <p class="triad-line"><strong>managed</strong> AGENTS.md blocks · .agents/skills</p>
-      </div>
-      <div class="verse">
-        <p>Put project-specific language in <code>.agents/</code> and list it with <code>pray</code> inside <code>compose</code>.<br>
-        Hand-edits inside managed spans surface as <em>custom implementation</em> in <code>pray verify</code> and <code>pray drift</code>.</p>
-      </div>
-      <pre class="incantation incantation--wide" tabindex="0"><code>compose "AGENTS.md" do
-  pray ".agents/project.md"
-  pray "amkisko/working-rules", "~> 2.0"
-  pray ".agents/security.md"
-end
-
-tree ".agents/skills" do
-  pray "amkisko/engineering-audit", "~> 2.0"
-end
-
-local ".agents/private.md", optional: true</code></pre>
-      <p class="whisper whisper--center">Local paths re-embed on each render. Declaration order inside <code>compose</code> is render order. Declare <em>silence</em> to omit a shared fragment; the lock records it. For a project-only package: <code>pray prayer init</code>, then a path source in <code>Prayfile</code>. Whole-file destinations use <code>pray "pkg", "~&gt; 1.0", file: "SECURITY.md"</code>.</p>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <section class="plinth" id="triad">
-      <header class="plinth-head plinth-head--beat-a">
-        <p class="section-glyph" aria-hidden="true">V</p>
-        <p class="museum-label">materialization</p>
-        <p class="morse-rhythm" aria-hidden="true">.--. ·−· ·− −·−−</p>
-      </header>
-      <div class="prose">
-        <p>A manifest entry differs from bytes a tool loads. Truth: <code>Prayfile.lock</code>. Recovery: <code>.pray/cache</code>. Influence: rendered files opened at inference time.</p>
-      </div>
-      <div class="triad">
-        <p class="triad-line"><strong>truth</strong> Prayfile.lock</p>
-        <p class="triad-line"><strong>recovery</strong> .pray/cache</p>
-        <p class="triad-line"><strong>influence</strong> AGENTS.md · skills · tool targets</p>
-      </div>
-      <blockquote class="signal" data-echo="before inference before inference">
-        rendered files carry influence
-      </blockquote>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <section class="plinth" id="prayers">
-      <header class="plinth-head plinth-head--beat-b">
-        <p class="section-glyph" aria-hidden="true">VI</p>
-        <p class="museum-label">amkisko/prayers</p>
-        <p class="morse-rhythm" aria-hidden="true">·−·</p>
-      </header>
-      <div class="prose">
-        <p>
-          <a href="https://github.com/amkisko/prayers">amkisko/prayers</a> hosts shared fragments, skills, and community files. Compose fragments; tree skills; use <code>file:</code> for whole community docs. Do not compose <code>getting-started</code>.
-        </p>
-      </div>
-      <p class="ledger-label">baseline compose</p>
-      <dl class="ledger">
-        <div class="ledger-row"><dt>working-rules</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>security</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>docs-conventions</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>dependency-issues</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>dependency-policy</dt><dd>fragment + skill</dd></div>
-        <div class="ledger-row"><dt>minimal-implementation</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>finite-state-machines</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>branch-naming</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>preferred-stack</dt><dd>fragment + skill</dd></div>
-        <div class="ledger-row"><dt>writing-prose</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>claims-audit</dt><dd>fragment + skill</dd></div>
-        <div class="ledger-row"><dt>rfc-process</dt><dd>fragment + skill</dd></div>
-        <div class="ledger-row"><dt>rejected-changes</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>publish-checks</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>collaboration-workflow</dt><dd>fragment</dd></div>
-      </dl>
-      <p class="ledger-label">one language pack</p>
-      <dl class="ledger">
-        <div class="ledger-row"><dt>ruby-conventions</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>rust-conventions</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>elixir-conventions</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>kotlin-conventions</dt><dd>fragment</dd></div>
-      </dl>
-      <p class="ledger-label">product surfaces when true</p>
-      <dl class="ledger">
-        <div class="ledger-row"><dt>keep-the-work</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>background-jobs</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>delivery-budgets</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>durable-cache</dt><dd>fragment + skill</dd></div>
-        <div class="ledger-row"><dt>io-simulation</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>planned-release</dt><dd>fragment + skill</dd></div>
-        <div class="ledger-row"><dt>pressure-benchmarking</dt><dd>skill</dd></div>
-      </dl>
-      <p class="ledger-label">skills (tree, not compose)</p>
-      <dl class="ledger">
-        <div class="ledger-row"><dt>engineering-audit</dt><dd>skill</dd></div>
-        <div class="ledger-row"><dt>security-audit</dt><dd>skill</dd></div>
-        <div class="ledger-row"><dt>changelog-update</dt><dd>skill</dd></div>
-        <div class="ledger-row"><dt>api-contract-migration</dt><dd>skill</dd></div>
-        <div class="ledger-row"><dt>operational-signal-intake</dt><dd>skill</dd></div>
-        <div class="ledger-row"><dt>public-surface-recon</dt><dd>skill</dd></div>
-        <div class="ledger-row"><dt>infer-conventions</dt><dd>skill</dd></div>
-        <div class="ledger-row"><dt>session-review</dt><dd>skill</dd></div>
-        <div class="ledger-row"><dt>ci-review</dt><dd>skill</dd></div>
-        <div class="ledger-row"><dt>change-review</dt><dd>skill</dd></div>
-        <div class="ledger-row"><dt>agent-artifact</dt><dd>skill</dd></div>
-        <div class="ledger-row"><dt>agent-discovery</dt><dd>skill</dd></div>
-        <div class="ledger-row"><dt>derivation-audit</dt><dd>skill</dd></div>
-        <div class="ledger-row"><dt>agent-run-supervision</dt><dd>skill</dd></div>
-      </dl>
-      <p class="ledger-label">community files</p>
-      <dl class="ledger">
-        <div class="ledger-row"><dt>community-security</dt><dd>file</dd></div>
-        <div class="ledger-row"><dt>community-code-of-conduct</dt><dd>file</dd></div>
-        <div class="ledger-row"><dt>community-governance</dt><dd>file</dd></div>
-        <div class="ledger-row"><dt>community-contributing</dt><dd>file</dd></div>
-        <div class="ledger-row"><dt>getting-started</dt><dd>README only</dd></div>
-      </dl>
-      <p class="whisper whisper--center">
-        <a href="https://github.com/amkisko/prayers#package-catalog">full catalog</a>
-      </p>
-    </section>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <section class="plinth" id="repos">
-      <header class="plinth-head plinth-head--beat-a">
-        <p class="section-glyph" aria-hidden="true">VII</p>
-        <p class="museum-label">repositories</p>
-        <p class="morse-rhythm" aria-hidden="true">.--. ·−· ·− −·−−</p>
-      </header>
-
-      <div class="repo-pair" aria-label="Source repositories">
+    <section class="plinth plinth--compact" id="paths" aria-label="Paths">
+      <div class="repo-pair repo-pair--tight">
         <a class="repo-voice" href="https://github.com/kiskolabs/pray" target="_blank" rel="noopener noreferrer">
           <span class="repo-path">kiskolabs/pray</span>
         </a>
@@ -475,22 +179,15 @@ local ".agents/private.md", optional: true</code></pre>
           <span class="repo-path">amkisko/prayers</span>
         </a>
       </div>
+      <p class="foot-links foot-links--inline">
+        <a href="index.md">markdown</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://amaaov.github.io/pages/20260626120000_prayfile_language_before_inference_en.html">essay</a>
+        <span aria-hidden="true">·</span>
+        <a href="https://amaaov.github.io/pages/20260627120000_pray_demo_en.html">demo</a>
+      </p>
     </section>
   </main>
-
-  <footer class="site-foot">
-    <p class="foot-links">
-      <a href="index.md">markdown</a>
-      <span aria-hidden="true">·</span>
-      <a href="llms.txt">llms.txt</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://github.com/kiskolabs/pray/blob/main/SPEC.md">specification</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://amaaov.github.io/pages/20260626120000_prayfile_language_before_inference_en.html">chamber essay</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://amaaov.github.io/pages/20260627120000_pray_demo_en.html">interactive demo</a>
-    </p>
-  </footer>
 
   <script src="assets/landing.js" defer></script>
 </body>

@@ -22,6 +22,7 @@
 - amkisko/prayers README install line still shows `cargo install … pray`; publishers should align with pray-cli.
 - Optional: link RFCs under kiskolabs/pray `rfcs/` beside SPEC.md once landing wants dual entry.
 - AGENTS.md is about 24 KiB after adapt; trim compose set later if the 16 KiB budget matters in practice.
+- Superseded for landing IA: adopt prompt and package ledger moved off HTML in `docs/issues/20261110182840_landing-slim-design-md.md`.
 
 ## Source
 

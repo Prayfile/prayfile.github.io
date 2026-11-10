@@ -2,11 +2,11 @@
 
 > Package manager for the language placed before inference. Prayfile lists pre-inference material as dependency; `pray` resolves, locks, and renders `AGENTS.md` and related targets.
 
-Canonical site: [pray.kisko.dev](https://pray.kisko.dev/). HTML is the primary presentation; [index.md](https://pray.kisko.dev/index.md) mirrors this landing in Markdown.
+Canonical site: [pray.kisko.dev](https://pray.kisko.dev/). HTML is a one-screen presentation; [index.md](https://pray.kisko.dev/index.md) mirrors it in Markdown.
 
 ## Start here
 
-- [Landing (HTML)](https://pray.kisko.dev/): Orientation, CLI and tools paths, start rites, adopt prompt, project-specific rules, materialization, prayers catalog
+- [Landing (HTML)](https://pray.kisko.dev/): Brand, install, collapsed prompt (show / copy), outbound links
 - [Landing (Markdown)](https://pray.kisko.dev/index.md): Same content without layout or scripts
 - [Specification](https://github.com/kiskolabs/pray/blob/main/SPEC.md): Prayfile format and CLI contract (`compose`, `tree`, `pray`, `file:`, `pray format`)
 - [Install](https://github.com/kiskolabs/pray#install-pray): `cargo install pray-cli --locked` (binary name `pray`; git: `cargo install --git https://github.com/kiskolabs/pray --locked pray-cli`)
@@ -22,7 +22,7 @@ Recommended on `prayfile "1"`:
 
 ## Adopt amkisko/prayers (agent prompt)
 
-Use when wiring a repository like an amkisko consumer. HTML landing has a copy control for the same text.
+Use when wiring a repository like an amkisko consumer. This file is the durable home for the adopt prompt. The HTML landing keeps the same text behind a closed `#prompt` veil with copy, plus a link here.
 
 ```
 Adopt pray + amkisko/prayers in this repository the same way amkisko consumers do.

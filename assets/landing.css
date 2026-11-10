@@ -84,6 +84,12 @@ body {
   overflow-x: hidden;
 }
 
+body.screen-fit {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
 .moisture-field {
   position: fixed;
   inset: 0;
@@ -186,6 +192,51 @@ body {
   gap: clamp(3.5rem, 10vh, 7rem);
 }
 
+.chamber--screen {
+  flex: 1 1 auto;
+  justify-content: center;
+  gap: clamp(1.35rem, 3.8vh, 2.4rem);
+  padding: clamp(4.4rem, 9vh, 5.8rem) 1.25rem clamp(1.5rem, 3.5vh, 2.4rem);
+  width: 100%;
+}
+
+.chamber--screen .pray-voice {
+  font-size: clamp(2.4rem, 8vw, 4rem);
+  margin-bottom: 0.5rem;
+}
+
+.chamber--screen .subtitle {
+  margin-bottom: 1.15rem;
+  font-size: 0.98em;
+}
+
+.chamber--screen .signal--hero {
+  font-size: clamp(1.05rem, 2.4vw, 1.45rem);
+  margin: 0;
+  padding: 0.35em 0;
+}
+
+.chamber--screen .morse-rhythm--hero {
+  margin: 0.55rem 0 0;
+}
+
+.chamber--screen .plinth--compact {
+  width: min(100%, calc(var(--text-width) + 4rem));
+}
+
+.chamber--screen .incantation {
+  font-size: 0.66rem;
+}
+
+.chamber--screen .whisper {
+  margin-top: 0.7rem;
+  font-size: 0.78em;
+}
+
+.chamber--screen .repo-path {
+  font-size: clamp(1.2rem, 3.2vw, 1.85rem);
+}
+
 .plinth {
   width: min(100%, calc(var(--text-width) + 10rem));
   position: relative;
@@ -245,7 +296,8 @@ body {
 
 .prose a,
 .rite-list a,
-.verse a {
+.verse a,
+.triad-line a {
   color: var(--accent);
   text-decoration: none;
   transition:
@@ -255,14 +307,16 @@ body {
 
 .prose a:hover,
 .rite-list a:hover,
-.verse a:hover {
+.verse a:hover,
+.triad-line a:hover {
   color: var(--accent-bright);
   text-shadow: 0 0 10px var(--link-glow);
 }
 
 .prose a:focus-visible,
 .rite-list a:focus-visible,
-.verse a:focus-visible {
+.verse a:focus-visible,
+.triad-line a:focus-visible {
   color: var(--ink);
   text-shadow: 0 0 12px var(--link-glow);
   outline: none;
@@ -628,6 +682,122 @@ body {
   color: var(--ink);
   text-shadow: 0 0 12px var(--link-glow);
   outline: none;
+}
+
+.copy-rite--bar {
+  position: static;
+  padding: 0.15em 0;
+}
+
+.prompt-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1rem 1.5rem;
+  width: min(100%, calc(var(--text-width) + 4rem));
+  margin: 0.15rem auto 0;
+}
+
+.veil {
+  display: grid;
+  grid-template-rows: 0fr;
+  width: min(92vw, 40rem);
+  max-width: 40rem;
+  margin: 0 auto;
+  transition: grid-template-rows 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.veil.is-open {
+  grid-template-rows: 1fr;
+}
+
+.veil-clip {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.veil-toggle {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  transition:
+    color var(--link-duration) ease,
+    text-shadow var(--link-duration) ease;
+}
+
+.veil-toggle::after {
+  content: " · show";
+  color: var(--ink-ghost);
+  letter-spacing: 0.18em;
+}
+
+.veil-toggle[aria-expanded="true"]::after {
+  content: " · hide";
+}
+
+.veil-toggle:hover,
+.veil-toggle:focus-visible {
+  color: var(--accent-bright);
+  text-shadow: 0 0 10px var(--link-glow);
+  outline: none;
+}
+
+.veil-panel {
+  margin-top: 1rem;
+  opacity: 0;
+  transform: translateY(-0.35rem);
+  transition:
+    opacity 0.36s ease,
+    transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.veil.is-open .veil-panel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .veil,
+  .veil-panel {
+    transition: none;
+  }
+}
+
+.adopt-llms {
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-decoration: none;
+  transition:
+    color var(--link-duration) ease,
+    text-shadow var(--link-duration) ease;
+}
+
+.adopt-llms:hover,
+.adopt-llms:focus-visible {
+  color: var(--accent-bright);
+  text-shadow: 0 0 10px var(--link-glow);
+  outline: none;
+}
+
+.repo-pair--tight {
+  margin-bottom: 1.15rem;
+  gap: clamp(1.6rem, 5.5vw, 3.4rem);
+}
+
+.foot-links--inline {
+  margin: 0.15rem 0 0;
+  text-align: center;
 }
 
 .incantation {

@@ -4,6 +4,8 @@ Landing page for [pray](https://github.com/kiskolabs/pray) and [amkisko/prayers]
 
 Published at [pray.kisko.dev](https://pray.kisko.dev/) via GitHub Pages from `index.html`. Markdown mirror: [index.md](index.md). LLM index: [llms.txt](llms.txt).
 
+Before changing landing UI, read root `DESIGN.md` (repo-local; not a public index).
+
 Shared agent guidance is declared in `Prayfile` and rendered into `AGENTS.md`. After changing the recipe:
 
 ```sh

@@ -87,6 +87,8 @@
     var buttons = document.querySelectorAll(".copy-rite");
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
         var button = event.currentTarget;
         var targetId = button.getAttribute("data-copy-target");
         var node = targetId ? document.getElementById(targetId) : null;
@@ -117,6 +119,24 @@
     }
   }
 
+  function initPromptVeil() {
+    var toggle = document.getElementById("prompt-toggle");
+    var veil = document.getElementById("prompt-veil");
+    var panel = document.getElementById("prompt-panel");
+    if (!toggle || !veil || !panel) return;
+
+    toggle.addEventListener("click", function () {
+      var open = !veil.classList.contains("is-open");
+      veil.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      if (open) {
+        panel.removeAttribute("inert");
+      } else {
+        panel.setAttribute("inert", "");
+      }
+    });
+  }
+
   function fallbackCopy(text, onSuccess) {
     var area = document.createElement("textarea");
     area.value = text;
@@ -136,4 +156,5 @@
   initPrayBackdrop();
   initMorseDrift();
   initCopyRites();
+  initPromptVeil();
 })();
