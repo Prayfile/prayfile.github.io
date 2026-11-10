@@ -6,16 +6,13 @@ Do not edit managed blocks in `AGENTS.md` or provisioned files under `.agents/`.
 To change shared guidance, update `Prayfile` and run `pray install`.
 
 <!-- pray:ae5d334a -->
-## Additional instructions
+## prayfile.github.io
 
-### .agents/project.md
 Static GitHub Pages landing for pray and Prayfile at [pray.kisko.dev](https://pray.kisko.dev/).
 
 Primary surfaces: `index.html` (presentation), `index.md` (Markdown mirror), `llms.txt` (LLM index), `assets/`.
 
 Keep HTML and Markdown examples aligned with the Prayfile destination DSL in [kiskolabs/pray](https://github.com/kiskolabs/pray) (`compose`, `tree`, `pray`, `file:`). Spec and CLI live upstream; this repo only publishes the public landing.
-
-## Shared instructions
 <!-- pray:ae5d334a -->
 
 <!-- pray:9068e4a2 -->
@@ -222,53 +219,54 @@ Related: `security` forbids secrets in issues and owns the session notice when c
 - follow docs-conventions for `docs/` and `usr/`; when encoding how this tree writes, use infer-conventions.
 <!-- pray:48e8a6b3 -->
 
-<!-- pray:aa6c8f33 -->
-## Shared prayers
 
-This project uses [pray](https://github.com/kiskolabs/pray) to install and lock shared inference input from the amkisko prayers distribution.
+<!-- pray:edcc5f67 -->
+## Dependency issues
 
-Install the CLI:
+When work surfaces a clearly visible bug or defect in a dependency (wrong behavior, broken API contract, regression between versions, or a fix already merged upstream but not released), say so in the task output and suggest a concrete fix path: upgrade, pin, patch, vendor, workaround, or upstream report.
 
-```sh
-cargo install --git https://github.com/kiskolabs/pray --locked pray
-```
+Store evidence under `docs/dependencies/#{YYYYMMDDHHMMSS}_<kebab-case-title>.md`; no README index in that tree. Each file should make these findable (use `##` headings or equivalent; omit empty sections): Dependency (name, version constraint, lockfile entry if any), Symptom (what breaks and where), Evidence (repro steps, logs, stack traces, links to issues or commits), Suggested fix (upgrade, pin, patch, workaround, or upstream report), Next (todo, planned, open questions), Source (links upstream: issue, PR, release note, commit, and downstream materializations in this repo). Git history is the edit log.
 
-Declare destinations with `compose`, `tree`, and `pray ..., file:`:
+Do not open drive-by dependency hunts; record only issues encountered while doing the requested work and only when the defect is evident from behavior or published upstream facts, not speculation.
 
-```prayfile
-prayfile "1"
-source "amkisko", git: "https://github.com/amkisko/prayers.git"
+For proactive selection, alteration, and audit rules, use `dependency-policy` and the dependency-audit skill.
+<!-- pray:edcc5f67 -->
 
-compose "AGENTS.md" do
-  pray ".agents/project.md"
-  pray "amkisko/working-rules", "~> 2.0"
-end
+<!-- pray:3ac5d6ce -->
+## Dependency policy
 
-tree ".agents/skills" do
-  pray "amkisko/engineering-audit", "~> 2.0"
-end
+Rules for adding, changing, or removing third-party packages. Apply across languages. Names vary by ecosystem; concepts do not.
 
-pray "amkisko/community-security", "~> 1.1", file: "SECURITY.md"
-```
+Terminology:
 
-Initialize or update managed input:
+- package manifest - declares intent (`gemspec`, `package.json`, `Cargo.toml`, `mix.exs`, etc.)
+- lockfile - pins the resolved graph CI and developers install
+- registry - published versions consumers resolve (`RubyGems`, `npm`, `crates.io`, `Hex`, etc.)
+- hot path - code on the security, auth, crypto, IO, or request/response boundary users rely on
 
-```sh
-pray install
-pray plan
-pray apply
-pray verify
-```
+Stop until one of these applies before adding a dependency:
 
-Declare dependencies in `Prayfile`. Do not edit managed spans in `AGENTS.md` or `.agents/skills/`.
+- stdlib or the framework for this tree already covers it;
+- an installed transitive dependency already covers it without a second library for the same job;
+- the feature needs a new package and tests will prove behavior.
 
-To refresh shared guidance after publishers release new versions:
+Run dependency-audit for direct dependency changes, graph audits, releases with hot-path package changes, and plausible dependency vulnerability or exploitation signals found during ordinary work. Keep the evidence and assessment in the live-work or dependency record.
 
-```sh
-pray update
-pray plan
-pray apply
-```
+On resolved lockfile graph or runtime-pin upgrades (automated or human), map upstream changelog or release notes to this tree's usage, then gather before/after resource samples for install or graph storage, resident memory, CPU or a stated proxy, and shipped bundle or image size when the product ships bytes. Use isolated checkouts and the same consumer-owned measure commands on both revisions. Report the comparison; write to a change request only when authorized. Cheaper or smaller without comparable samples is inference. Absolute ship-path ceilings stay in `delivery-budgets`. When measured load shows a dependency no longer meets named requirements, reassess replace, remove, or narrow first-party work through dependency-audit before custom code.
 
-Distribution source for amkisko-wide packages: [amkisko/prayers](https://github.com/amkisko/prayers).
-<!-- pray:aa6c8f33 -->
+Related: `dependency-issues` records upstream defects found during real work; `minimal-implementation` covers YAGNI before adding deps and before custom replacement; `engineering-audit` covers code and pipeline review; `delivery-budgets` owns continuous size and build-timing gates; `pressure-benchmarking` owns load ladders and ceiling ratchet episodes, not one-change upgrade deltas.
+<!-- pray:3ac5d6ce -->
+
+<!-- pray:d893ab3d -->
+## Claims and testimony
+
+Treat checkable facts, quotations, dates, quantities, and causal statements as claims. Treat author memory and clearly framed interpretation as testimony.
+
+- Inventing scenes, sources, numbers, or quotations is out of scope.
+- A link or citation in the text is not verification. The cited passage must support the claim's scope, date, population, and causal strength.
+- If a material external claim cannot be checked in this run, mark it unverifiable rather than rounding it to certainty.
+- Keep statement, domain, and quantifiers on a formal claim. Freeze quantities from the producing artifact. A later file does not prove an earlier check.
+- Run the claims-audit skill when asked to verify, fact-check, or research checkable claims, or when prose under edit states material external facts, quotations, dates, or research summaries.
+
+Related: `writing-prose` covers voice and quality constructs; `engineering-audit` covers code and pipeline behavior; `derivation-audit` covers symbolic derivation when a consumer asks for that job.
+<!-- pray:d893ab3d -->
