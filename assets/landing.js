@@ -125,15 +125,22 @@
     var panel = document.getElementById("prompt-panel");
     if (!toggle || !veil || !panel) return;
 
-    toggle.addEventListener("click", function () {
-      var open = !veil.classList.contains("is-open");
+    function setOpen(open) {
       veil.classList.toggle("is-open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
       if (open) {
+        panel.removeAttribute("hidden");
         panel.removeAttribute("inert");
       } else {
+        panel.setAttribute("hidden", "");
         panel.setAttribute("inert", "");
       }
+    }
+
+    setOpen(false);
+
+    toggle.addEventListener("click", function () {
+      setOpen(!veil.classList.contains("is-open"));
     });
   }
 

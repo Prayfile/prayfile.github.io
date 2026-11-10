@@ -11,10 +11,11 @@
 - Updated `index.html` Bunny font request to variable Newsreader + IBM Plex Mono.
 - Updated `assets/landing.css` font tokens, optical sizing, veil collapse, copy shell width, and foot-link layout.
 - Updated `DESIGN.md` typography contract to Newsreader + IBM Plex Mono.
+- Follow-up Safari hard fix: closed veil uses `display: none` + `hidden`/`inert` (no grid `0fr`); copy/prompt controls use flex + explicit `-webkit-appearance: none` button reset; asset URLs cache-busted.
 
 ## Next
 
-- Human Safari pass on closed veil, copy controls, and foot-link centering after deploy.
+- Human Safari pass on local `http://127.0.0.1:8765/` then deploy; live will stay broken until publish.
 - Confirm Bunny serves the Newsreader `opsz` variable face in production browsers.
 
 ## Source
