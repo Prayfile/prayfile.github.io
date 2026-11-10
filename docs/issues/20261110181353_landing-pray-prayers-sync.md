@@ -35,7 +35,7 @@
 
 - Brand and first viewport: hero brand word works; supporting paragraph is long for a strict hero budget but matches the chamber voice already shipped.
 - Composition: single-column chamber, no dashboard, no cards; fork section is intentional dual path, not a card grid.
-- Typography and atmosphere: Italiana / Cormorant / IBM Plex Mono with moisture field and backdrop motion; keep as established system (would conflict with generic “avoid dark/glow” defaults if redesigned from scratch).
+- Typography and atmosphere: serif + mono with moisture field and backdrop motion; later Newsreader + IBM Plex Mono (`docs/issues/20261110165900_landing-safari-newsreader.md`). Keep chamber system (would conflict with generic “avoid dark/glow” defaults if redesigned from scratch).
 - Gaps: no copy affordance on rites before this change; package ledger stale; nav order prioritizes start over roman section order (acceptable for conversion).
 - Motion: scroll vibe, backdrop pin, morse pulse; reduced-motion path exists.
 

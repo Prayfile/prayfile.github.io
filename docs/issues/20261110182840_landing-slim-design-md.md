@@ -8,7 +8,7 @@
 - Adopt agent prompt stays canonical in `llms.txt`. Package catalog stays in amkisko/prayers README.
 - Introduce root `DESIGN.md` for the chamber visual system in Google Labs DESIGN.md alpha format. Point agents at [getdesign.md](https://getdesign.md/) as the related catalog; do not clone a foreign template over the chamber.
 - Nav order matches page order: start, zones, next, spec.
-- Chamber visual language stays (void, brass, Italiana / Cormorant / IBM Plex Mono). No light or card redesign.
+- Chamber visual language stays (void, brass, serif + mono). Typography later moved to Newsreader + IBM Plex Mono (`docs/issues/20261110165900_landing-safari-newsreader.md`). No light or card redesign.
 
 ## Effects
 

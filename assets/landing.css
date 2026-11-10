@@ -1,9 +1,9 @@
 :root {
-  --body-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.28rem);
+  --body-size: clamp(1.08rem, 1rem + 0.35vw, 1.3rem);
   --body-leading: 1.72;
   --text-width: 34rem;
-  --serif: "Cormorant Garamond", Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
-  --display: "Italiana", "Cormorant Garamond", Georgia, serif;
+  --serif: "Newsreader", Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  --display: "Newsreader", Georgia, "Iowan Old Style", Palatino, serif;
   --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
   --ink: rgba(236, 228, 218, 0.88);
   --ink-soft: rgba(236, 228, 218, 0.62);
@@ -77,6 +77,8 @@ body {
   font-family: var(--serif);
   font-size: var(--body-size);
   line-height: var(--body-leading);
+  font-optical-sizing: auto;
+  font-weight: 400;
   color: var(--ink);
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
@@ -112,8 +114,10 @@ body.screen-fit {
   font-family: var(--display);
   font-size: clamp(7rem, 26vw, 15rem);
   font-weight: 400;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 72;
   line-height: 0.95;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.06em;
   text-transform: lowercase;
   color: var(--accent);
   opacity: var(--pray-backdrop-opacity);
@@ -122,6 +126,7 @@ body.screen-fit {
   transform-origin: 50% 50%;
   pointer-events: none;
   user-select: none;
+  -webkit-user-select: none;
 }
 
 .pray-backdrop.is-pinned {
@@ -221,6 +226,9 @@ body.screen-fit {
 }
 
 .chamber--screen .plinth--compact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: min(100%, calc(var(--text-width) + 4rem));
 }
 
@@ -254,7 +262,9 @@ body.screen-fit {
   font-family: var(--display);
   font-size: clamp(2.8rem, 11vw, 5rem);
   font-weight: 400;
-  letter-spacing: 0.1em;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 72;
+  letter-spacing: 0.04em;
   line-height: 1;
   color: var(--ink);
   text-wrap: balance;
@@ -362,7 +372,10 @@ body.screen-fit {
   text-align: center;
   font-family: var(--display);
   font-size: clamp(1.15rem, 2.8vw, 1.65rem);
-  letter-spacing: 0.06em;
+  font-weight: 400;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 36;
+  letter-spacing: 0.02em;
   line-height: 1.45;
   color: var(--accent);
   text-wrap: balance;
@@ -643,12 +656,18 @@ body.screen-fit {
 
 .incantation-shell {
   position: relative;
-  max-width: var(--text-width);
+  width: fit-content;
+  max-width: min(100%, var(--text-width));
   margin: 0 auto;
 }
 
 .incantation-shell .incantation--wide,
 .incantation-shell .incantation--prompt {
+  max-width: none;
+}
+
+.veil .incantation-shell {
+  width: 100%;
   max-width: none;
 }
 
@@ -661,6 +680,8 @@ body.screen-fit {
   padding: 0.2em 0;
   border: 0;
   background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
   font-family: var(--mono);
   font-size: 0.5rem;
   letter-spacing: 0.22em;
@@ -700,21 +721,47 @@ body.screen-fit {
 }
 
 .veil {
-  display: grid;
-  grid-template-rows: 0fr;
   width: min(92vw, 40rem);
   max-width: 40rem;
   margin: 0 auto;
-  transition: grid-template-rows 0.48s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.veil.is-open {
-  grid-template-rows: 1fr;
 }
 
 .veil-clip {
+  display: grid;
+  grid-template-rows: 0fr;
   overflow: hidden;
   min-height: 0;
+  max-height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    grid-template-rows 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    max-height 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0.48s;
+}
+
+.veil.is-open .veil-clip {
+  grid-template-rows: 1fr;
+  max-height: min(70vh, 40rem);
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    grid-template-rows 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    max-height 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0s;
+}
+
+.veil-panel {
+  min-height: 0;
+  overflow: hidden;
+  margin-top: 0;
+  opacity: 0;
+  transition: opacity 0.36s ease;
+}
+
+.veil.is-open .veil-panel {
+  margin-top: 1rem;
+  opacity: 1;
 }
 
 .veil-toggle {
@@ -722,6 +769,8 @@ body.screen-fit {
   padding: 0;
   border: 0;
   background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
   cursor: pointer;
   font-family: var(--mono);
   font-size: 0.55rem;
@@ -750,22 +799,9 @@ body.screen-fit {
   outline: none;
 }
 
-.veil-panel {
-  margin-top: 1rem;
-  opacity: 0;
-  transform: translateY(-0.35rem);
-  transition:
-    opacity 0.36s ease,
-    transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.veil.is-open .veil-panel {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .veil,
+  .veil-clip,
+  .veil.is-open .veil-clip,
   .veil-panel {
     transition: none;
   }
@@ -796,8 +832,15 @@ body.screen-fit {
 }
 
 .foot-links--inline {
-  margin: 0.15rem 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+  width: 100%;
+  margin: 0.15rem auto 0;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .incantation {
@@ -984,7 +1027,10 @@ code {
 .repo-path {
   font-family: var(--display);
   font-size: clamp(1.6rem, 4vw, 2.4rem);
-  letter-spacing: 0.06em;
+  font-weight: 400;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 48;
+  letter-spacing: 0.02em;
   color: var(--accent);
   opacity: 0.88;
   transition:
@@ -1031,8 +1077,12 @@ code {
   margin-top: 0.75rem;
   font-family: var(--mono);
   font-size: 0.55rem;
-  letter-spacing: 0.18em;
   text-transform: uppercase;
+}
+
+.foot-links a,
+.foot-links span {
+  letter-spacing: 0.18em;
 }
 
 .foot-links a {

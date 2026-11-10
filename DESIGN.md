@@ -40,33 +40,37 @@ colors:
 
 ## Typography
 
-Three families only. Italiana for the brand voice and signal quotes. Cormorant Garamond for body and museum labels. IBM Plex Mono for nav, thresholds, commands, and ledger labels. Body copy may justify; code never does.
+Two families only. Newsreader (OFL, Production Type) for brand voice, signals, body, and subtitles; use optical sizing (`opsz`) so display cuts stay open and text cuts stay sturdy on screen. IBM Plex Mono for nav, thresholds, commands, and ledger labels. Body copy may justify; code never does.
 
 ```yaml
 typography:
   display:
-    fontFamily: Italiana
+    fontFamily: Newsreader
     fontSize: 80px
     fontWeight: 400
     lineHeight: 1
-    letterSpacing: 0.1em
+    letterSpacing: 0.04em
+    opticalSizing: 72
   signal:
-    fontFamily: Italiana
+    fontFamily: Newsreader
     fontSize: 26px
     fontWeight: 400
     lineHeight: 1.45
-    letterSpacing: 0.06em
+    letterSpacing: 0.02em
+    opticalSizing: 36
   body:
-    fontFamily: "Cormorant Garamond"
+    fontFamily: Newsreader
     fontSize: 20px
     fontWeight: 400
     lineHeight: 1.72
+    opticalSizing: auto
   subtitle:
-    fontFamily: "Cormorant Garamond"
+    fontFamily: Newsreader
     fontSize: 17px
     fontWeight: 400
     lineHeight: 1.5
     letterSpacing: 0
+    fontStyle: italic
   label:
     fontFamily: "IBM Plex Mono"
     fontSize: 9px
