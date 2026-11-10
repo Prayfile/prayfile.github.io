@@ -42,8 +42,8 @@
       var scrollY = window.scrollY || window.pageYOffset;
       var progress = Math.min(1, Math.max(0, scrollY / fadeDistance));
       var eased = smoothstep(progress);
-      var stickyTop = headerRect.top + headerRect.height * 0.62;
-      var heroAnchor = heroRect.top + heroRect.height * 0.5 + 42;
+      var stickyTop = headerRect.top + headerRect.height * 0.55;
+      var heroAnchor = heroRect.top + heroRect.height * 0.18;
       var pinned = heroRect.bottom <= headerRect.bottom + 2;
       var top = pinned ? stickyTop : Math.max(stickyTop, heroAnchor);
 

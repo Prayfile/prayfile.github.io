@@ -19,7 +19,7 @@
   --scroll-vibe: 0;
   --wet-haze: 0.05;
   --pray-backdrop-scale: 1;
-  --pray-backdrop-top: 28vh;
+  --pray-backdrop-top: 14vh;
   --pray-backdrop-left: 50%;
   --pray-backdrop-opacity: 0.13;
   --pray-backdrop-blur: 6px;
@@ -1153,7 +1153,7 @@ code {
 
   .pray-backdrop {
     --pray-backdrop-scale: 0.16;
-    --pray-backdrop-top: 3.4rem;
+    --pray-backdrop-top: 2.6rem;
     --pray-backdrop-opacity: 0.12;
     --pray-backdrop-blur: 8px;
   }
