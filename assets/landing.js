@@ -83,7 +83,57 @@
     }
   }
 
+  function initCopyRites() {
+    var buttons = document.querySelectorAll(".copy-rite");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener("click", function (event) {
+        var button = event.currentTarget;
+        var targetId = button.getAttribute("data-copy-target");
+        var node = targetId ? document.getElementById(targetId) : null;
+        if (!node) return;
+
+        var text = node.innerText || node.textContent || "";
+        text = text.replace(/\n$/, "");
+
+        function markCopied() {
+          var previous = button.textContent;
+          button.textContent = "copied";
+          button.classList.add("is-copied");
+          window.setTimeout(function () {
+            button.textContent = previous;
+            button.classList.remove("is-copied");
+          }, 1600);
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(markCopied).catch(function () {
+            fallbackCopy(text, markCopied);
+          });
+          return;
+        }
+
+        fallbackCopy(text, markCopied);
+      });
+    }
+  }
+
+  function fallbackCopy(text, onSuccess) {
+    var area = document.createElement("textarea");
+    area.value = text;
+    area.setAttribute("readonly", "");
+    area.style.position = "fixed";
+    area.style.left = "-9999px";
+    document.body.appendChild(area);
+    area.select();
+    try {
+      if (document.execCommand("copy")) onSuccess();
+    } finally {
+      document.body.removeChild(area);
+    }
+  }
+
   initScrollVibe();
   initPrayBackdrop();
   initMorseDrift();
+  initCopyRites();
 })();

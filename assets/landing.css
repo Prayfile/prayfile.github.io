@@ -574,15 +574,60 @@ body {
 }
 
 .rite--beat-a .incantation,
+.rite--beat-a .incantation-shell,
 .rite--beat-a .prose,
 .rite--beat-a .whisper {
   margin-right: clamp(0rem, 8vw, 3.5rem);
 }
 
 .rite--beat-b .incantation,
+.rite--beat-b .incantation-shell,
 .rite--beat-b .prose,
 .rite--beat-b .whisper {
   margin-left: clamp(0rem, 8vw, 3.5rem);
+}
+
+.incantation-shell {
+  position: relative;
+  max-width: var(--text-width);
+  margin: 0 auto;
+}
+
+.incantation-shell .incantation--wide,
+.incantation-shell .incantation--prompt {
+  max-width: none;
+}
+
+.copy-rite {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  margin: 0;
+  padding: 0.2em 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  cursor: pointer;
+  transition:
+    color var(--link-duration) ease,
+    text-shadow var(--link-duration) ease;
+}
+
+.copy-rite:hover,
+.copy-rite.is-copied {
+  color: var(--accent-bright);
+  text-shadow: 0 0 10px var(--link-glow);
+}
+
+.copy-rite:focus-visible {
+  color: var(--ink);
+  text-shadow: 0 0 12px var(--link-glow);
+  outline: none;
 }
 
 .incantation {
@@ -597,12 +642,40 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
+.incantation-shell .incantation {
+  padding-right: 3.2rem;
+}
+
 .incantation--wide {
   font-size: 0.64rem;
 }
 
 .incantation--compact {
   font-size: 0.66rem;
+}
+
+.incantation--prompt {
+  max-height: min(28rem, 70vh);
+  overflow: auto;
+  font-size: 0.58rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  text-align: left;
+}
+
+.ledger-label {
+  margin: 2rem auto 0.4rem;
+  max-width: var(--text-width);
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-align: center;
+}
+
+.ledger-label:first-of-type {
+  margin-top: 1.4rem;
 }
 
 .whisper {
@@ -830,9 +903,11 @@ code {
   }
 
   .rite--beat-a .incantation,
+  .rite--beat-a .incantation-shell,
   .rite--beat-a .prose,
   .rite--beat-a .whisper,
   .rite--beat-b .incantation,
+  .rite--beat-b .incantation-shell,
   .rite--beat-b .prose,
   .rite--beat-b .whisper {
     margin-left: 0;

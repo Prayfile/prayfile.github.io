@@ -77,6 +77,7 @@
     <a class="home-link" href="#threshold">pray</a>
     <nav class="top-nav" aria-label="Site">
       <a class="nav-link" href="#start">start</a>
+      <a class="nav-link" href="#adopt">adopt</a>
       <a class="nav-link" href="#local">local</a>
       <a class="nav-link" href="#orientation">orientation</a>
       <a class="nav-link" href="#paths">paths</a>
@@ -184,8 +185,11 @@
           <p class="museum-label museum-label--rite">install</p>
           <p class="morse-rhythm morse-rhythm--rite" aria-hidden="true">.--.</p>
         </header>
-        <pre class="incantation" tabindex="0"><code>cargo install --git https://github.com/kiskolabs/pray --locked pray</code></pre>
-        <p class="whisper">Installs to <code>~/.cargo/bin</code>. Add <code>PATH</code> if required.</p>
+        <div class="incantation-shell">
+          <button type="button" class="copy-rite" data-copy-target="install-incantation">copy</button>
+          <pre class="incantation" id="install-incantation" tabindex="0"><code>cargo install pray-cli --locked</code></pre>
+        </div>
+        <p class="whisper">Crates.io package is <code>pray-cli</code> (name <code>pray</code> is taken); binary is <code>pray</code>. Git form: <code>cargo install --git https://github.com/kiskolabs/pray --locked pray-cli</code>. Installs to <code>~/.cargo/bin</code>.</p>
       </article>
 
       <article class="rite rite--beat-b">
@@ -194,11 +198,14 @@
           <p class="museum-label museum-label--rite">scaffold</p>
           <p class="morse-rhythm morse-rhythm--rite" aria-hidden="true">·−·</p>
         </header>
-        <pre class="incantation" tabindex="0"><code>cd your-project
+        <div class="incantation-shell">
+          <button type="button" class="copy-rite" data-copy-target="scaffold-incantation">copy</button>
+          <pre class="incantation" id="scaffold-incantation" tabindex="0"><code>cd your-project
 pray init
 pray install
 pray plan
 pray apply</code></pre>
+        </div>
         <p class="whisper">Writes <code>Prayfile</code>, <code>Prayfile.lock</code>, and rendered targets including <code>AGENTS.md</code>.</p>
       </article>
 
@@ -209,13 +216,21 @@ pray apply</code></pre>
           <p class="morse-rhythm morse-rhythm--rite" aria-hidden="true">·−</p>
         </header>
         <div class="prose">
-          <p>Example <code>Prayfile</code> using <a href="https://github.com/amkisko/prayers">amkisko/prayers</a>:</p>
+          <p>Example <code>Prayfile</code> using <a href="https://github.com/amkisko/prayers">amkisko/prayers</a>. Compose project overlay first; pick one language pack; do not compose <code>getting-started</code>.</p>
         </div>
-        <pre class="incantation incantation--wide" tabindex="0"><code>prayfile "1"
+        <div class="incantation-shell">
+          <button type="button" class="copy-rite" data-copy-target="shared-incantation">copy</button>
+          <pre class="incantation incantation--wide" id="shared-incantation" tabindex="0"><code>prayfile "1"
+
+pray do
+  support_email "support@app.example"
+  security_email "security@app.example"
+end
 
 source "amkisko", git: "https://github.com/amkisko/prayers.git"
 
 compose "AGENTS.md" do
+  pray ".agents/project.md"
   pray "amkisko/working-rules", "~> 2.0"
   pray "amkisko/ruby-conventions", "~> 1.0"
 end
@@ -223,7 +238,8 @@ end
 tree ".agents/skills" do
   pray "amkisko/engineering-audit", "~> 2.0"
 end</code></pre>
-        <p class="whisper">Use <code>rust-conventions</code> or <code>elixir-conventions</code> on other stacks. Legacy <code>target</code> / <code>agent</code> forms remain valid; <code>pray format</code> rewrites them to this destination DSL.</p>
+        </div>
+        <p class="whisper">Swap for <code>rust-conventions</code>, <code>elixir-conventions</code>, or <code>kotlin-conventions</code>. Keep composed <code>AGENTS.md</code> under ~16&nbsp;KiB. Legacy <code>target</code> / <code>agent</code> still parse on prayfile <code>"1"</code> but warn; they leave in version&nbsp;2 — run <code>pray format</code>.</p>
       </article>
 
       <article class="rite rite--beat-b">
@@ -231,14 +247,81 @@ end</code></pre>
           <p class="museum-label museum-label--rite">daily</p>
           <p class="morse-rhythm morse-rhythm--rite" aria-hidden="true">−·−−</p>
         </header>
-        <pre class="incantation incantation--compact" tabindex="0"><code>pray install    # resolve dependencies
+        <div class="incantation-shell">
+          <button type="button" class="copy-rite" data-copy-target="daily-incantation">copy</button>
+          <pre class="incantation incantation--compact" id="daily-incantation" tabindex="0"><code>pray install    # resolve dependencies
 pray plan       # preview rendered changes
 pray apply      # write targets + refresh lock spans
 pray format     # rewrite Prayfile to destination DSL
 pray verify     # checksum managed spans
 pray drift      # detect hand-edits and renderer drift
-pray confess    # signed accept / reject feedback</code></pre>
+pray confess    # signed accept / reject feedback
+pray update     # bump within constraints, then plan/apply</code></pre>
+        </div>
       </article>
+    </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <section class="plinth plinth--start" id="adopt">
+      <header class="plinth-head plinth-head--beat-b">
+        <p class="section-glyph" aria-hidden="true">III·b</p>
+        <p class="museum-label">adopt for agents</p>
+        <p class="morse-rhythm" aria-hidden="true">·− ····</p>
+      </header>
+      <div class="prose">
+        <p>Paste into a coding agent when wiring this repository like an amkisko consumer. Shared guidance stays locked; project overlay stays local.</p>
+      </div>
+      <div class="incantation-shell">
+        <button type="button" class="copy-rite" data-copy-target="adopt-prompt">copy</button>
+        <pre class="incantation incantation--prompt" id="adopt-prompt" tabindex="0"><code>Adopt pray + amkisko/prayers in this repository the same way amkisko consumers do.
+
+Goal
+Treat shared agent guidance as locked dependencies, not copy-pasted AGENTS.md.
+Keep project-specific context local. Render pinned targets tools can read on disk.
+
+Prerequisites
+1. Install CLI: cargo install pray-cli --locked
+   (git: cargo install --git https://github.com/kiskolabs/pray --locked pray-cli)
+2. Read https://pray.kisko.dev/ and https://github.com/amkisko/prayers README (consumer section).
+3. Prefer destination DSL: compose / tree / pray …, file: (run `pray format` if legacy target/agent syntax appears).
+
+Do this in the repo root
+1. If no Prayfile: `pray init`, then replace the scaffold with an amkisko-style Prayfile.
+2. Add to .gitignore: `.pray` (or at least `.pray/cache/`).
+3. Create human-owned `.agents/project.md` with only this repo’s scope, credentials env names (no secrets), and product boundaries.
+4. Write Prayfile:
+   - prayfile "1"
+   - optional pray do block with support/security emails for this product
+   - source "amkisko", git: "https://github.com/amkisko/prayers.git"
+   - compose "AGENTS.md": start with pray ".agents/project.md", then shared fragments
+   - tree ".agents/skills": skills only (not always-on prose)
+   - community files via pray "amkisko/community-…", "~> x.y", file: "SECURITY.md" (etc.) when this is a public/community repo
+5. Package selection rules:
+   - Compose exactly one language pack: ruby-conventions | rust-conventions | elixir-conventions | kotlin-conventions (match the tree; omit if not applicable).
+   - Baseline compose usually includes: working-rules, security, docs-conventions, dependency-issues, dependency-policy, minimal-implementation, finite-state-machines, branch-naming, preferred-stack, writing-prose, claims-audit, rfc-process, rejected-changes, publish-checks, collaboration-workflow.
+   - Do NOT compose getting-started.
+   - Tree dependency-policy / rfc-process / claims-audit / preferred-stack / planned-release / durable-cache whenever those are composed (procedures live in the skills).
+   - Add product-surface packages only if true: keep-the-work (person-facing place), background-jobs, delivery-budgets (ships bytes), durable-cache (cache/rebuildable derived state), io-simulation, pressure-benchmarking (skill), planned-release when the product uses that release rhythm.
+   - Keep AGENTS.md under ~16 KiB; prefer fragments &lt;1 KB; large procedure → skill + short pointer.
+6. Resolve and materialize:
+   pray install
+   pray plan
+   pray apply
+   pray verify
+7. Commit: Prayfile, Prayfile.lock, rendered AGENTS.md, .agents/skills/**, community files if rendered, .agents/project.md, .gitignore update.
+   Do not commit .pray/cache.
+
+Hard rules
+- Never hand-edit managed spans between &lt;!-- pray:… --&gt; markers; change Prayfile (or project.md) and re-apply.
+- Shared prayers stay generic; local paths/secrets/deploy detail stay in .agents/ and docs/.
+- After publishers bump packages: pray update && pray plan && pray apply && pray verify.
+- Mirror a sibling amkisko consumer Prayfile of the same language when unsure; do not invent a parallel instruction system beside Prayfile.
+
+Done when
+pray verify passes, AGENTS.md and skills are rendered from lock, project overlay is composed first, and cache is ignored.</code></pre>
+      </div>
+      <p class="whisper whisper--center">Also in <a href="llms.txt">llms.txt</a>. Tune emails, language pack, and product-surface packages per repo.</p>
     </section>
 
     <div class="divider" aria-hidden="true"></div>
@@ -307,27 +390,68 @@ local ".agents/private.md", optional: true</code></pre>
       </header>
       <div class="prose">
         <p>
-          <a href="https://github.com/amkisko/prayers">amkisko/prayers</a> hosts shared fragments — conventions, skills, audits — referenced from your <code>Prayfile</code>.
+          <a href="https://github.com/amkisko/prayers">amkisko/prayers</a> hosts shared fragments, skills, and community files. Compose fragments; tree skills; use <code>file:</code> for whole community docs. Do not compose <code>getting-started</code>.
         </p>
       </div>
+      <p class="ledger-label">baseline compose</p>
       <dl class="ledger">
         <div class="ledger-row"><dt>working-rules</dt><dd>fragment</dd></div>
         <div class="ledger-row"><dt>security</dt><dd>fragment</dd></div>
         <div class="ledger-row"><dt>docs-conventions</dt><dd>fragment</dd></div>
         <div class="ledger-row"><dt>dependency-issues</dt><dd>fragment</dd></div>
         <div class="ledger-row"><dt>dependency-policy</dt><dd>fragment + skill</dd></div>
+        <div class="ledger-row"><dt>minimal-implementation</dt><dd>fragment</dd></div>
+        <div class="ledger-row"><dt>finite-state-machines</dt><dd>fragment</dd></div>
+        <div class="ledger-row"><dt>branch-naming</dt><dd>fragment</dd></div>
+        <div class="ledger-row"><dt>preferred-stack</dt><dd>fragment + skill</dd></div>
+        <div class="ledger-row"><dt>writing-prose</dt><dd>fragment</dd></div>
+        <div class="ledger-row"><dt>claims-audit</dt><dd>fragment + skill</dd></div>
+        <div class="ledger-row"><dt>rfc-process</dt><dd>fragment + skill</dd></div>
+        <div class="ledger-row"><dt>rejected-changes</dt><dd>fragment</dd></div>
+        <div class="ledger-row"><dt>publish-checks</dt><dd>fragment</dd></div>
+        <div class="ledger-row"><dt>collaboration-workflow</dt><dd>fragment</dd></div>
+      </dl>
+      <p class="ledger-label">one language pack</p>
+      <dl class="ledger">
         <div class="ledger-row"><dt>ruby-conventions</dt><dd>fragment</dd></div>
         <div class="ledger-row"><dt>rust-conventions</dt><dd>fragment</dd></div>
         <div class="ledger-row"><dt>elixir-conventions</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>minimal-implementation</dt><dd>fragment</dd></div>
+        <div class="ledger-row"><dt>kotlin-conventions</dt><dd>fragment</dd></div>
+      </dl>
+      <p class="ledger-label">product surfaces when true</p>
+      <dl class="ledger">
+        <div class="ledger-row"><dt>keep-the-work</dt><dd>fragment</dd></div>
+        <div class="ledger-row"><dt>background-jobs</dt><dd>fragment</dd></div>
+        <div class="ledger-row"><dt>delivery-budgets</dt><dd>fragment</dd></div>
+        <div class="ledger-row"><dt>durable-cache</dt><dd>fragment + skill</dd></div>
+        <div class="ledger-row"><dt>io-simulation</dt><dd>fragment</dd></div>
+        <div class="ledger-row"><dt>planned-release</dt><dd>fragment + skill</dd></div>
+        <div class="ledger-row"><dt>pressure-benchmarking</dt><dd>skill</dd></div>
+      </dl>
+      <p class="ledger-label">skills (tree, not compose)</p>
+      <dl class="ledger">
         <div class="ledger-row"><dt>engineering-audit</dt><dd>skill</dd></div>
+        <div class="ledger-row"><dt>security-audit</dt><dd>skill</dd></div>
         <div class="ledger-row"><dt>changelog-update</dt><dd>skill</dd></div>
-        <div class="ledger-row"><dt>collaboration-workflow</dt><dd>fragment</dd></div>
-        <div class="ledger-row"><dt>getting-started</dt><dd>fragment</dd></div>
+        <div class="ledger-row"><dt>api-contract-migration</dt><dd>skill</dd></div>
+        <div class="ledger-row"><dt>operational-signal-intake</dt><dd>skill</dd></div>
+        <div class="ledger-row"><dt>public-surface-recon</dt><dd>skill</dd></div>
+        <div class="ledger-row"><dt>infer-conventions</dt><dd>skill</dd></div>
+        <div class="ledger-row"><dt>session-review</dt><dd>skill</dd></div>
+        <div class="ledger-row"><dt>ci-review</dt><dd>skill</dd></div>
+        <div class="ledger-row"><dt>change-review</dt><dd>skill</dd></div>
+        <div class="ledger-row"><dt>agent-artifact</dt><dd>skill</dd></div>
+        <div class="ledger-row"><dt>agent-discovery</dt><dd>skill</dd></div>
+        <div class="ledger-row"><dt>derivation-audit</dt><dd>skill</dd></div>
+        <div class="ledger-row"><dt>agent-run-supervision</dt><dd>skill</dd></div>
+      </dl>
+      <p class="ledger-label">community files</p>
+      <dl class="ledger">
         <div class="ledger-row"><dt>community-security</dt><dd>file</dd></div>
         <div class="ledger-row"><dt>community-code-of-conduct</dt><dd>file</dd></div>
         <div class="ledger-row"><dt>community-governance</dt><dd>file</dd></div>
         <div class="ledger-row"><dt>community-contributing</dt><dd>file</dd></div>
+        <div class="ledger-row"><dt>getting-started</dt><dd>README only</dd></div>
       </dl>
       <p class="whisper whisper--center">
         <a href="https://github.com/amkisko/prayers#package-catalog">full catalog</a>

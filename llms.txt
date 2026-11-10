@@ -6,10 +6,10 @@ Canonical site: [pray.kisko.dev](https://pray.kisko.dev/). HTML is the primary p
 
 ## Start here
 
-- [Landing (HTML)](https://pray.kisko.dev/): Orientation, CLI and tools paths, start rites, project-specific rules, materialization, prayers catalog
+- [Landing (HTML)](https://pray.kisko.dev/): Orientation, CLI and tools paths, start rites, adopt prompt, project-specific rules, materialization, prayers catalog
 - [Landing (Markdown)](https://pray.kisko.dev/index.md): Same content without layout or scripts
 - [Specification](https://github.com/kiskolabs/pray/blob/main/SPEC.md): Prayfile format and CLI contract (`compose`, `tree`, `pray`, `file:`, `pray format`)
-- [Install](https://github.com/kiskolabs/pray#installation): `cargo install --git https://github.com/kiskolabs/pray --locked pray`
+- [Install](https://github.com/kiskolabs/pray#install-pray): `cargo install pray-cli --locked` (binary name `pray`; git: `cargo install --git https://github.com/kiskolabs/pray --locked pray-cli`)
 
 ## Prayfile destination forms
 
@@ -18,11 +18,64 @@ Recommended on `prayfile "1"`:
 - `compose "AGENTS.md" do … end` — ordered local embeds and package fragments
 - `tree ".agents/skills" do … end` — folder/skill exports
 - `pray "owner/name", "~> 1.0", file: "SECURITY.md"` — exact file bytes
-- `pray format` (`fmt`) — rewrite legacy `target` / `agent` manifests to the destination DSL
+- `pray format` (`fmt`) — rewrite legacy `target` / `agent` manifests to the destination DSL (legacy forms warn; removed in version 2)
+
+## Adopt amkisko/prayers (agent prompt)
+
+Use when wiring a repository like an amkisko consumer. HTML landing has a copy control for the same text.
+
+```
+Adopt pray + amkisko/prayers in this repository the same way amkisko consumers do.
+
+Goal
+Treat shared agent guidance as locked dependencies, not copy-pasted AGENTS.md.
+Keep project-specific context local. Render pinned targets tools can read on disk.
+
+Prerequisites
+1. Install CLI: cargo install pray-cli --locked
+   (git: cargo install --git https://github.com/kiskolabs/pray --locked pray-cli)
+2. Read https://pray.kisko.dev/ and https://github.com/amkisko/prayers README (consumer section).
+3. Prefer destination DSL: compose / tree / pray …, file: (run `pray format` if legacy target/agent syntax appears).
+
+Do this in the repo root
+1. If no Prayfile: `pray init`, then replace the scaffold with an amkisko-style Prayfile.
+2. Add to .gitignore: `.pray` (or at least `.pray/cache/`).
+3. Create human-owned `.agents/project.md` with only this repo’s scope, credentials env names (no secrets), and product boundaries.
+4. Write Prayfile:
+   - prayfile "1"
+   - optional pray do block with support/security emails for this product
+   - source "amkisko", git: "https://github.com/amkisko/prayers.git"
+   - compose "AGENTS.md": start with pray ".agents/project.md", then shared fragments
+   - tree ".agents/skills": skills only (not always-on prose)
+   - community files via pray "amkisko/community-…", "~> x.y", file: "SECURITY.md" (etc.) when this is a public/community repo
+5. Package selection rules:
+   - Compose exactly one language pack: ruby-conventions | rust-conventions | elixir-conventions | kotlin-conventions (match the tree; omit if not applicable).
+   - Baseline compose usually includes: working-rules, security, docs-conventions, dependency-issues, dependency-policy, minimal-implementation, finite-state-machines, branch-naming, preferred-stack, writing-prose, claims-audit, rfc-process, rejected-changes, publish-checks, collaboration-workflow.
+   - Do NOT compose getting-started.
+   - Tree dependency-policy / rfc-process / claims-audit / preferred-stack / planned-release / durable-cache whenever those are composed (procedures live in the skills).
+   - Add product-surface packages only if true: keep-the-work (person-facing place), background-jobs, delivery-budgets (ships bytes), durable-cache (cache/rebuildable derived state), io-simulation, pressure-benchmarking (skill), planned-release when the product uses that release rhythm.
+   - Keep AGENTS.md under ~16 KiB; prefer fragments <1 KB; large procedure → skill + short pointer.
+6. Resolve and materialize:
+   pray install
+   pray plan
+   pray apply
+   pray verify
+7. Commit: Prayfile, Prayfile.lock, rendered AGENTS.md, .agents/skills/**, community files if rendered, .agents/project.md, .gitignore update.
+   Do not commit .pray/cache.
+
+Hard rules
+- Never hand-edit managed spans between <!-- pray:… --> markers; change Prayfile (or project.md) and re-apply.
+- Shared prayers stay generic; local paths/secrets/deploy detail stay in .agents/ and docs/.
+- After publishers bump packages: pray update && pray plan && pray apply && pray verify.
+- Mirror a sibling amkisko consumer Prayfile of the same language when unsure; do not invent a parallel instruction system beside Prayfile.
+
+Done when
+pray verify passes, AGENTS.md and skills are rendered from lock, project overlay is composed first, and cache is ignored.
+```
 
 ## Repositories
 
-- [kiskolabs/pray](https://github.com/kiskolabs/pray): CLI, Prayfile specification, examples, `pray serve`
+- [kiskolabs/pray](https://github.com/kiskolabs/pray): CLI, Prayfile specification, examples, `pray serve` (Rust/npm/Ruby/Nix; crates.io package `pray-cli`)
 - [amkisko/prayers](https://github.com/amkisko/prayers): Shared prayer packages
 
 ## Context essays (amaaov.github.io)
@@ -39,20 +92,14 @@ Recommended on `prayfile "1"`:
 
 [package catalog](https://github.com/amkisko/prayers#package-catalog)
 
-- working-rules — fragment
-- security — fragment
-- docs-conventions — fragment
-- dependency-issues — fragment
-- dependency-policy — fragment + skill
-- ruby-conventions — fragment
-- rust-conventions — fragment
-- elixir-conventions — fragment
-- minimal-implementation — fragment
-- engineering-audit — skill
-- changelog-update — skill
-- collaboration-workflow — fragment
-- getting-started — fragment
-- community-security — file
-- community-code-of-conduct — file
-- community-governance — file
-- community-contributing — file
+Baseline compose: working-rules, security, docs-conventions, dependency-issues, dependency-policy (+ skill), minimal-implementation, finite-state-machines, branch-naming, preferred-stack (+ skill), writing-prose, claims-audit (+ skill), rfc-process (+ skill), rejected-changes, publish-checks, collaboration-workflow
+
+One language pack: ruby-conventions | rust-conventions | elixir-conventions | kotlin-conventions
+
+Product surfaces when true: keep-the-work, background-jobs, delivery-budgets, durable-cache (+ skill), io-simulation, planned-release (+ skill), pressure-benchmarking (skill)
+
+Skills (tree, not compose): engineering-audit, security-audit, changelog-update, api-contract-migration, operational-signal-intake, public-surface-recon, infer-conventions, session-review, ci-review, change-review, agent-artifact, agent-discovery, derivation-audit, agent-run-supervision
+
+Community files: community-security, community-code-of-conduct, community-governance, community-contributing
+
+Do not compose getting-started (README material). Keep composed AGENTS.md under ~16 KiB.
